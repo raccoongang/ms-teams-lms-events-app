@@ -5,12 +5,15 @@ export interface OnlineMeetingInput {
   subject?: string;
   startDateTime: Moment;
   endDateTime: Moment;
+  content: string;
+  location: string;
 }
 
 export interface OnlineMeeting {
   id: string;
   joinWebUrl: string;
   subject: string;
+  content: string;
   videoTeleconferenceId: string;
   creationDateTime: Moment;
   startDateTime: Moment;
@@ -25,11 +28,13 @@ export interface OnlineMeeting {
 export function createDefaultMeetingInput(): OnlineMeetingInput {
   return {
     subject: '',
+    content: '',
     startDateTime: moment()
       .startOf('hour')
       .add(1, 'hour'),
     endDateTime: moment()
       .startOf('hour')
-      .add(2, 'hour')
+      .add(2, 'hour'),
+    location: '',
   };
 }
