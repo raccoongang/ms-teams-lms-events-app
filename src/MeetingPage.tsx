@@ -269,6 +269,26 @@ function MeetingPageComponent(props: MeetingPageProps) {
     nextMeeting.subject = newValue ?? '';
     props.setMeeting(nextMeeting);
   }
+  function onDescriptionChanged(
+    evt: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
+    newValue: string | undefined
+  ) {
+    // The meeting objects are small, cloning is cheap enough
+    // Normally would use immutable records or similar to avoid overhead.
+    const nextMeeting = _.cloneDeep(props.meeting);
+    nextMeeting.content = newValue ?? '';
+    props.setMeeting(nextMeeting);
+  }
+  function onLocationChanged(
+    evt: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
+    newValue: string | undefined
+  ) {
+    // The meeting objects are small, cloning is cheap enough
+    // Normally would use immutable records or similar to avoid overhead.
+    const nextMeeting = _.cloneDeep(props.meeting);
+    nextMeeting.location = newValue ?? '';
+    props.setMeeting(nextMeeting);
+  }
 
   function onStartDateSelected(date?: Moment) {
     const nextMeeting = _.cloneDeep(props.meeting);
@@ -368,6 +388,39 @@ function MeetingPageComponent(props: MeetingPageProps) {
               value={props.meeting?.subject}
               underlined
               onChange={onSubjectChanged}
+              errorMessage={
+                validationEnabled
+                  ? props.validationFailures.invalidTitle
+                  : undefined
+              }
+            />
+          </StackItem>
+        </Stack>
+        <Stack horizontal>
+          <StackItem grow>
+            <TextField
+              className="newMeetingContentInput"
+              placeholder={translate('meetingPage.content.input')}
+              value={props.meeting?.content}
+              multiline
+              underlined
+              onChange={onDescriptionChanged}
+              errorMessage={
+                validationEnabled
+                  ? props.validationFailures.invalidTitle
+                  : undefined
+              }
+            />
+          </StackItem>
+        </Stack>
+        <Stack horizontal>
+            <StackItem grow>
+            <TextField
+              className="newMeetingLocationInput"
+              placeholder={translate('meetingPage.location.input')}
+              value={props.meeting?.location}
+              underlined
+              onChange={onLocationChanged}
               errorMessage={
                 validationEnabled
                   ? props.validationFailures.invalidTitle

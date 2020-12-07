@@ -24,8 +24,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "build:health": "env REACT_APP_SKU=health react-scripts build",
+    "build:react-bundle": "webpack --config webpack.dev.config.js",
+    "build:health": "env REACT_APP_SKU=health react-scripts build:react",
+    "build:react": "react-scripts build",
+    "build:bundle": "webpack --config webpack.config.js",
+    "build": "npm run build:react-bundle && npm run build:bundle",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -53,6 +56,8 @@
     "@types/react": "16.9.0",
     "@types/react-dom": "16.9.0",
     "@types/react-redux": "7.1.7",
-    "@types/react-router": "5.1.4"
+    "@types/react-router": "5.1.4",
+    "ts-loader": "^8.0.11",
+    "webpack-cli": "^4.2.0"
   }
 }

@@ -1,17 +1,15 @@
----
-page_type: sample
-languages:
-- typescript
-products:
-- office-teams
-- ms-graph
-description: "Microsoft Teams Meeting Link Template"
-urlFragment: "msteams-meetings-template"
----
+# KSCDR MS Teams LMS app
+
+* To build bundle for use in xblock run `yarn build`, then copy the file `dist/bundle.min.js` to **ms-teams-html-xblock** public directory.
+
+* In the `msalApp.ts` file, **clientId** was set to the Application (client) ID of the KSCDR AD application **MS Teams LMS**.
+
+* App was configured to create Online Events.
+
 
 # Microsoft Teams Meeting Link Template
 
-<!-- 
+<!--
 Guidelines on README format: https://review.docs.microsoft.com/help/onboard/admin/samples/concepts/readme-template?branch=master
 
 Guidance on onboarding samples to docs.microsoft.com/samples: https://review.docs.microsoft.com/help/onboard/admin/samples/process/onboarding?branch=master
@@ -66,7 +64,7 @@ You'll need to register an app through the following process:
 
     Copy the Application Id. This is the unique identifier for your app.
 
-7. Under **Manage** on the left-hand pane, click **Authentication**. 
+7. Under **Manage** on the left-hand pane, click **Authentication**.
 7. CLick **Add a platform** and select **Web**.
 7. Under **Redirect URIs**, enter the following URIs:
     * `http://localhost:3000/`
@@ -113,32 +111,32 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 **Note: this is a one-way operation. Once you eject, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can eject at any time. This command will remove the single build dependency from your project. 
+If you aren’t satisfied with the build tool and configuration choices, you can eject at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except eject will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own. 
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except eject will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use eject. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it. 
+You don’t have to ever use eject. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
 ## Learn More
-You can learn more in the [Create React App documentation](https://create-react-app.dev/docs/getting-started/). 
+You can learn more in the [Create React App documentation](https://create-react-app.dev/docs/getting-started/).
 
-To learn React, check out the [React documentation](https://reactjs.org/). 
+To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Frequently Asked Questions
 
-### Does the meeting scheduler need to have a Teams? 
+### Does the meeting scheduler need to have a Teams?
 Meeting schedulers need to have a Microsoft Teams license. They need to be able to authenticate into the experience using the Microsoft account given to them by their school or work. Teams IT administrators also need to grant the scheduler with the ability to schedule meetings through [Teams policies](https://docs.microsoft.com/en-us/microsoftteams/meeting-policies-in-teams).
 
 ### Do you need Teams to join the meeting?
 If [anonymous join has been enabled](https://docs.microsoft.com/en-us/microsoftteams/meeting-settings-in-teams) within the scheduler’s Teams tenant, users do not need a license to join a meeting. Meetings created through this application respect all Teams [policies](https://docs.microsoft.com/en-us/microsoftteams/meeting-policies-in-teams), [settings](https://docs.microsoft.com/en-us/microsoftteams/meeting-settings-in-teams) and [options](https://support.office.com/en-us/article/roles-in-a-teams-meeting-c16fa7d0-1666-4dde-8686-0a0bfe16e019) applied by the scheduler and their IT administrator. Teams meetings can be joined over the web or any Teams client.
 
 ### Where can I learn more about the Teams meeting experience?
-Users 
+Users
 - [Getting started with Teams meetings](https://support.office.com/en-us/article/meetings-and-calls-d92432d5-dd0f-4d17-8f69-06096b6b48a8?ui=en-US&rs=en-US&ad=US#ID0EAABAAA=Meetings)
 - [Conduct meetings with Microsoft Teams](https://www.youtube.com/watch?reload=9&v=63cMG0fBRLM)
 - [Change who can present in a meeting](https://support.office.com/en-us/article/roles-in-a-teams-meeting-c16fa7d0-1666-4dde-8686-0a0bfe16e019)
 
-Admins 
+Admins
 - [Getting started with remote learning](https://docs.microsoft.com/en-us/MicrosoftTeams/remote-learning-edu)
 - [Manage Teams meeting policies](https://docs.microsoft.com/en-us/microsoftteams/meeting-policies-in-teams)
 - [Manage Teams meeting settings](https://docs.microsoft.com/en-us/microsoftteams/meeting-settings-in-teams)
@@ -181,4 +179,3 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-

@@ -3,28 +3,44 @@ import { msalApp } from '../auth/msalApp';
 import axios from 'axios';
 import moment from 'moment';
 
-export function createMeetingService() {
+export function createEventService() {
   return {
-    async createMeeting(meeting: OnlineMeetingInput) {
+    async createEvent(meeting: OnlineMeetingInput) {
       let token;
       try {
         token = await msalApp.acquireTokenSilent({
-          scopes: ['OnlineMeetings.ReadWrite']
+          scopes: ['Calendars.ReadWrite']
         });
       } catch (ex) {
         token = await msalApp.acquireTokenPopup({
-          scopes: ['OnlineMeetings.ReadWrite']
+          scopes: ['Calendars.ReadWrite']
         });
       }
 
       const requestBody = {
-        startDateTime: meeting.startDateTime?.toISOString(),
-        endDateTime: meeting.endDateTime?.toISOString(),
-        subject: meeting.subject
+          "subject": meeting.subject,
+          "body": {
+            "contentType": "HTML",
+            "content": meeting.content
+          },
+          "start": {
+              "dateTime": meeting.startDateTime?.toISOString(),
+              "timeZone": "Arabia Standard Time"
+          },
+          "end": {
+              "dateTime": meeting.endDateTime?.toISOString(),
+              "timeZone": "Arabia Standard Time"
+          },
+          "location":{
+              "displayName":  meeting.location
+          },
+          "attendees": [],
+          "isOnlineMeeting": true,
+          "onlineMeetingProvider": "teamsForBusiness"
       };
 
       const response = await axios.post(
-        'https://graph.microsoft.com/beta/me/onlineMeetings',
+        'https://graph.microsoft.com/beta/me/calendar/events',
         requestBody,
         {
           headers: {
@@ -33,27 +49,22 @@ export function createMeetingService() {
           }
         }
       );
-
-      const preview = decodeURIComponent(
-        (response.data.joinInformation.content?.split(',')?.[1] ?? '').replace(
-          /\+/g,
-          '%20'
-        )
-      );
+      const preview = response.data.body.content;
 
       const createdMeeting = {
         id: response.data.id,
-        creationDateTime: moment(response.data.creationDateTime),
+        creationDateTime: moment(response.data.createdDateTime),
         subject: response.data.subject,
         joinUrl: response.data.joinUrl,
-        joinWebUrl: response.data.joinWebUrl,
-        startDateTime: moment(response.data.startDateTime),
-        endDateTime: moment(response.data.endDateTime),
-        conferenceId: response.data.audioConferencing?.conferenceId || '',
-        tollNumber: response.data.audioConferencing?.tollNumber || '',
-        tollFreeNumber: response.data.audioConferencing?.tollFreeNumber || '',
-        dialinUrl: response.data.audioConferencing?.dialinUrl || '',
+        joinWebUrl: response.data.joinUrl,
+        startDateTime: moment(response.data.start?.dateTime),
+        endDateTime: moment(response.data.end?.dateTime),
+        conferenceId: response.data.onlineMeeting?.conferenceId || '',
+        tollNumber: response.data.onlineMeeting?.tollNumber || '',
+        tollFreeNumber: response.data.onlineMeeting?.tollFreeNumber || '',
+        dialinUrl: response.data.onlineMeeting?.dialinUrl || '',
         videoTeleconferenceId: response.data.videoTeleconferenceId,
+        content: response.data.body.content,
         preview
       } as OnlineMeeting;
 
