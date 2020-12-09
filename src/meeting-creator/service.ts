@@ -49,7 +49,10 @@ export function createEventService() {
           }
         }
       );
-      const preview = response.data.body.content;
+      const preview = response.data.subject +  '<br><br>' + response.data.body.content.replaceAll(
+        'noreferrer',
+        ''
+      );
 
       const createdMeeting = {
         id: response.data.id,
