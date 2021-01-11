@@ -1,5 +1,5 @@
 //shamelessly stolen from: https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/samples/react-sample-app/src/auth-utils.js
-import { UserAgentApplication } from 'msal';
+import { UserAgentApp } from './userAgentAppCustom.js'
 
 function isIE() {
   const ua = window.navigator.userAgent;
@@ -11,7 +11,7 @@ function isIE() {
   return msie || msie11;
 }
 
-export const msalApp = new UserAgentApplication({
+export const msalApp = new UserAgentApp({
   auth: {
     clientId: '9afe946b-459d-4c1b-b2d4-d639057bde16', // TODO: move this into a cfg value from composition root
     authority: 'https://login.microsoftonline.com/common',
