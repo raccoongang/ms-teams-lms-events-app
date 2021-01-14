@@ -13,7 +13,10 @@ export class UserAgentApp extends UserAgentApplication {
           var urlNavigate = authority.EndSessionEndpoint
               ? authority.EndSessionEndpoint + "?" + logout
               : _this.authority + "oauth2/v2.0/logout?" + logout;
-          window.open(urlNavigate, "_blank");
+          var logoutWindow = window.open(urlNavigate, "_blank");
+          if (logoutWindow === null) {
+            alert("Pop-up Blocker is enabled! Please add this site to your exception list.");
+          }
           window.location.reload();
       });
   }
